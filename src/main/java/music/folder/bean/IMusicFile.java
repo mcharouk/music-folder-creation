@@ -1,10 +1,10 @@
 package music.folder.bean;
 
 import java.io.File;
+import java.util.Optional;
 
 public interface IMusicFile {
-
-	String getArtistName();
+	
 	File getFile();
-	String getKind();
+	Optional<String> getRelativeTargetPath();
 }

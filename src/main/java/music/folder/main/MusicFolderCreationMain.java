@@ -1,6 +1,8 @@
 package music.folder.main;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.PrintWriter;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -8,11 +10,15 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import music.folder.processor.MusicFileProcessor;
 
 public class MusicFolderCreationMain {
 
+	private static final Logger logger = LoggerFactory.getLogger(MusicFolderCreationMain.class);
+	
 	public static void main(String[] args) {
 
 		Options options = new Options();
@@ -44,10 +50,18 @@ public class MusicFolderCreationMain {
 			musicFileProcessor.moveFiles(musicRootFolderPath, fileLocationPath);
 
 		} catch (ParseException e) {
-			e.printStackTrace();
-			formatter.printHelp("MusicFolderCreationMain", options);
+			logger.info("Error while parsing arguments ", e);
+			printUsage(options, formatter);
+			
 		}
 
+	}
+
+	private static void printUsage(Options options, HelpFormatter formatter) {
+		ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+		PrintWriter logPrintWriter = new PrintWriter(byteArrayOutputStream, true);
+		formatter.printUsage(logPrintWriter, 1000, "MusicFolderCreationMain", options);
+		logger.info(new String(byteArrayOutputStream.toByteArray()));
 	}
 
 }

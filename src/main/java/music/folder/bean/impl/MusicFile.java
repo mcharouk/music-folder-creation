@@ -1,6 +1,9 @@
 package music.folder.bean.impl;
 
 import java.io.File;
+import java.util.Optional;
+
+import org.apache.commons.lang3.StringUtils;
 
 import music.folder.bean.IMusicFile;
 
@@ -20,17 +23,15 @@ public class MusicFile implements IMusicFile {
 	@Override
 	public File getFile() {
 		return file;
-	}
-
+	}	
+	
 	@Override
-	public String getArtistName() {
-		return this.artistName;
+	public Optional<String> getRelativeTargetPath() {
+		
+		if(StringUtils.isEmpty(artistName) || StringUtils.isEmpty(kind) ){
+			return Optional.empty();
+		}
+		return Optional.of(String.format("%s/%s", kind, artistName));
 	}
-
-	@Override
-	public String getKind() {
-		return kind;
-	}
-
 	
 }
