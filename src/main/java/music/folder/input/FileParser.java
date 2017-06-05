@@ -32,7 +32,8 @@ public class FileParser {
 	}
 
 	public List<IMusicFile> getMusicFiles() {
-		return FileUtils.listFiles(FileUtils.getFile(rootFolder), mp3FileFilter, null).stream().map(file -> {
+		return FileUtils.listFiles(FileUtils.getFile(rootFolder), mp3FileFilter, null).stream()
+				.map(file -> {
 			try {
 				
 				ID3v2 mp3Tags = new Mp3File(file.getAbsolutePath()).getId3v2Tag();
@@ -41,7 +42,9 @@ public class FileParser {
 				logger.warn(String.format("unable to read %s", file.getAbsolutePath()), e);
 				return Optional.empty();
 			}
-		}).filter(Optional::isPresent).map(optional -> (MusicFile)optional.get()).collect(Collectors.toList());
+		}).filter(Optional::isPresent)
+		  .map(optional -> (MusicFile)optional.get())
+		  .collect(Collectors.toList());
 	}
 
 }
