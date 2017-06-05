@@ -41,7 +41,7 @@ public class MusicFolderCreationMain {
 			}
 
 			MusicFileProcessor musicFileProcessor = new MusicFileProcessor();
-			musicFileProcessor.createFolders(musicRootFolderPath, fileLocationPath);
+			musicFileProcessor.moveFiles(musicRootFolderPath, fileLocationPath);
 
 		} catch (ParseException e) {
 			e.printStackTrace();

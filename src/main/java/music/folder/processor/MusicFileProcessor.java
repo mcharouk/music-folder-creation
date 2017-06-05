@@ -9,7 +9,7 @@ import music.folder.output.impl.OutputMusicHandlerImpl;
 
 public class MusicFileProcessor {
 	
-	public void createFolders(String musicRootFolder, String filesRootFolder){
+	public void moveFiles(String musicRootFolder, String filesRootFolder){
 		FileParser fileParser = new FileParser(filesRootFolder);
 		List<IMusicFile> files = fileParser.getMusicFiles();
 		
